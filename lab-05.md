@@ -1,7 +1,7 @@
-Lab 04 - La Quinta is Spanish for next to Denny’s, Pt. 2
+Lab 05 - Wrangling spatial data
 ================
-Insert your name here
-Insert date here
+Alex Connolly
+IFeb 21 2022
 
 ### Load packages and data
 
@@ -15,10 +15,6 @@ states <- read_csv("data/states.csv")
 ```
 
 ### Exercise 1
-
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
 
 ### Exercise 2
 
