@@ -18,29 +18,248 @@ states <- read_csv("data/states.csv")
 
 ### Exercise 1
 
+```{r alaska}
+dn_ak <- dennys %>%
+  filter(state == "AK")
+nrow(dn_ak)
 
+```
+3 locations in Alaska
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+
+```{r lqak}
+lq_ak <- laquinta %>%
+  filter(state == "AK")
+nrow(lq_ak)
+```
+
+2
+
+
 
 ### Exercise 3
 
-...
+
+```{r joining}
+dn_lq_ak <- full_join(dn_ak, lq_ak, by = "state")
+dn_lq_ak
+
+```
 
 ### Exercise 4
 
-...
+6 observations, the variables are Address, city, zip, longitude, and latitude of both x and y (seperately) and state
+
+
 
 ### Exercise 5
 
-...
+```{r haversine}
+haversine <- function(long1, lat1, long2, lat2, round = 3) {
+  # convert to radians
+  long1 = long1 * pi / 180
+  lat1  = lat1  * pi / 180
+  long2 = long2 * pi / 180
+  lat2  = lat2  * pi / 180
+  
+  R = 6371 # Earth mean radius in km
+  
+  a = sin((lat2 - lat1)/2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1)/2)^2
+  d = R * 2 * asin(sqrt(a))
+  
+  return( round(d,round) ) # distance in km
+}
+```
+
 
 ### Exercise 6
 
-...
+```{r distance}
+dn_lq_ak <- dn_lq_ak %>%
+  mutate(dn_lq_ak, distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+dn_lq_ak
+```
+### Exercise 7
 
-Add exercise headings as needed.
+```{r mindist}
+dn_lq_ak_mindist <- dn_lq_ak %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+dn_lq_ak_mindist
+```
+
+### Exercise 8
+```{r plot}
+dn_lq_ak%>%
+  ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
+```
+
+```{r plot2}
+dn_lq_ak_mindist %>%
+  ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
+```
+As you can see, each Dennys has a La Quinta fairly close to it. Zooming in, you can see how one Dennys is even closer to a La Quinta, the one on 2900 Denali. 
+
+### Exercise 9
+
+```{r NorthCarolina}
+dn_nc <- dennys %>%
+  filter(state == "NC")
+nrow(dn_nc)
+
+```
+28 locations in North Carolina
+
+
+
+```{r lqnc}
+lq_nc <- laquinta %>%
+  filter(state == "NC")
+nrow(lq_nc)
+```
+
+12 La Quinta locations in NC
+
+
+```{r joining2}
+dn_lq_nc <- full_join(dn_nc, lq_nc, by = "state")
+dn_lq_nc
+
+```
+
+336 observations, the variables are Address, city, zip, longitude, and latitude of both x and y (separately) and state
+
+
+
+```{r distance2}
+dn_lq_nc <- dn_lq_nc %>%
+  mutate(dn_lq_nc, distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+dn_lq_nc
+```
+
+```{r mindist2}
+dn_lq_nc_mindist <- dn_lq_nc %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+dn_lq_nc_mindist
+```
+
+```{r plot3}
+dn_lq_nc%>%
+  ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
+```
+```{r plot11}
+dn_lq_nc_mindist%>%
+  ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
+```
+
+### Exercise 10
+
+
+```{r Texas}
+dn_tx <- dennys %>%
+  filter(state == "TX")
+nrow(dn_tx)
+
+```
+200 Dennys locations in Texas
+
+
+
+```{r lqtx}
+lq_tx <- laquinta %>%
+  filter(state == "TX")
+nrow(lq_tx)
+```
+
+237 La Quinta locations in NC
+
+
+```{r joining3}
+dn_lq_tx <- full_join(dn_tx, lq_tx, by = "state")
+dn_lq_tx
+
+```
+
+47,400 observations, the variables are Address, city, zip, longitude, and latitude of both x and y (separately) and state
+
+
+
+```{r distance3}
+dn_lq_tx <- dn_lq_tx %>%
+  mutate(dn_lq_tx, distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+dn_lq_tx
+```
+
+```{r mindist3}
+dn_lq_tx_mindist <- dn_lq_tx %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+dn_lq_tx_mindist
+```
+
+```{r plot10}
+dn_lq_tx%>%
+  ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
+```
+```{r plot4}
+dn_lq_tx_mindist%>%
+  ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
+```
+
+### Exercise 11
+
+```{r Pennsylvania}
+dn_pa <- dennys %>%
+  filter(state == "PA")
+nrow(dn_pa)
+
+```
+40 locations in Pennsylvania
+
+
+
+```{r lqpa}
+lq_pa <- laquinta %>%
+  filter(state == "PA")
+nrow(lq_pa)
+```
+
+10 La Quinta locations in PA
+
+
+```{r joining4}
+dn_lq_pa <- full_join(dn_pa, lq_pa, by = "state")
+dn_lq_pa
+
+```
+
+400 observations, the variables are Address, city, zip, longitude, and latitude of both x and y (separately) and state
+
+
+
+```{r distance4}
+dn_lq_pa <- dn_lq_pa %>%
+  mutate(dn_lq_pa, distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+dn_lq_pa
+```
+
+```{r mindist4}
+dn_lq_pa_mindist <- dn_lq_pa %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+dn_lq_pa_mindist
+```
+
+```{r plot7}
+dn_lq_pa%>%
+  ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
+```
+```{r plot8}
+dn_lq_pa_mindist%>%
+  ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
+```
+
+### Exercise 12
