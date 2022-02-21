@@ -228,14 +228,17 @@ dn_lq_nc%>%
   ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
 ```
 
-![](lab-05_files/figure-gfm/plot3-1.png)<!-- -->
+![](lab-05_files/figure-gfm/plot3-1.png)<!-- --> As you can see here,
+there are some La Quintas that are close to Dennys, but some far away.
 
 ``` r
 dn_lq_nc_mindist%>%
   ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
 ```
 
-![](lab-05_files/figure-gfm/plot11-1.png)<!-- -->
+![](lab-05_files/figure-gfm/plot11-1.png)<!-- --> So, lets look at the
+closest for each one. It does seem as each of them have one that is
+fairly close, over half within 50.
 
 ### Exercise 10
 
@@ -257,7 +260,7 @@ nrow(lq_tx)
 
     ## [1] 237
 
-237 La Quinta locations in NC
+237 La Quinta locations in TX
 
 ``` r
 dn_lq_tx <- full_join(dn_tx, lq_tx, by = "state")
@@ -329,19 +332,24 @@ dn_lq_tx_mindist
 
 ``` r
 dn_lq_tx%>%
-  ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
+  ggplot(mapping = aes(x=address.x, y=distance)) + geom_boxplot()
 ```
 
-![](lab-05_files/figure-gfm/plot10-1.png)<!-- -->
+![](lab-05_files/figure-gfm/plot10-1.png)<!-- --> With how many
+observations were here, the scatter plot we have been using was not that
+helpful. This box and whisker plot, while tough to read, shows the sheer
+number of obserations, and how some are close but a lot are very far
+away from some Laquitas. But this is not that helpful since there are so
+many of each. So let’s look at closest.
 
 ``` r
 dn_lq_tx_mindist%>%
   ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
 ```
 
-![](lab-05_files/figure-gfm/plot4-1.png)<!-- -->
-
-### Exercise 11
+![](lab-05_files/figure-gfm/plot4-1.png)<!-- --> As you can see here, it
+does appear as if there is a La Quinta very close to almost every
+Dennys, only a handful were farther away. ### Exercise 11
 
 ``` r
 dn_pa <- dennys %>%
@@ -436,13 +444,20 @@ dn_lq_pa%>%
   ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
 ```
 
-![](lab-05_files/figure-gfm/plot7-1.png)<!-- -->
+![](lab-05_files/figure-gfm/plot7-1.png)<!-- --> There are a lot here.
+Some seem close, but not as close as the other states. Lets take a
+closer look
 
 ``` r
 dn_lq_pa_mindist%>%
   ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
 ```
 
-![](lab-05_files/figure-gfm/plot8-1.png)<!-- -->
+![](lab-05_files/figure-gfm/plot8-1.png)<!-- --> Looking at the closest,
+there are some that are close. But this is probably the worst of the
+four states. ### Exercise 12
 
-### Exercise 12
+I would say that Texas it probably was the most applicable. Pretty much
+every Dennys had a LaQuinta super close. The Alaska ones did too - very
+close - but there was only 3, so the joke is funnnier in Texas. NC and
+PA were not nearly as good.

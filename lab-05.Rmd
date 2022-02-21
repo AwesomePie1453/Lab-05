@@ -150,10 +150,13 @@ dn_lq_nc_mindist
 dn_lq_nc%>%
   ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
 ```
+As you can see here, there are some La Quintas that are close to Dennys, but some far away. 
+
 ```{r plot11}
 dn_lq_nc_mindist%>%
   ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
 ```
+So, lets look at the closest for each one. It does seem as each of them have one that is fairly close, over half within 50. 
 
 ### Exercise 10
 
@@ -174,7 +177,7 @@ lq_tx <- laquinta %>%
 nrow(lq_tx)
 ```
 
-237 La Quinta locations in NC
+237 La Quinta locations in TX
 
 
 ```{r joining3}
@@ -202,13 +205,17 @@ dn_lq_tx_mindist
 
 ```{r plot10}
 dn_lq_tx%>%
-  ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
+  ggplot(mapping = aes(x=address.x, y=distance)) + geom_boxplot()
 ```
+With how many observations were here, the scatter plot we have been using was not that helpful. This box and whisker plot, while tough to read, shows the sheer number of obserations, and how some are close but a lot are very far away from some Laquitas. But this is not that helpful since there are so many of each. So let's look at closest. 
+
+
+
 ```{r plot4}
 dn_lq_tx_mindist%>%
   ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
 ```
-
+As you can see here, it does appear as if there is a La Quinta very close to almost every Dennys, only a handful were farther away. 
 ### Exercise 11
 
 ```{r Pennsylvania}
@@ -257,9 +264,13 @@ dn_lq_pa_mindist
 dn_lq_pa%>%
   ggplot(mapping = aes(x=address.x, y=distance)) + geom_point()
 ```
+There are a lot here. Some seem close, but not as close as the other states. Lets take a closer look
+
 ```{r plot8}
 dn_lq_pa_mindist%>%
   ggplot(mapping = aes(x=address.x, y=closest)) + geom_point()
 ```
-
+Looking at the closest, there are some that are close. But this is probably the worst of the four states. 
 ### Exercise 12
+
+I would say that Texas it probably was the most applicable. Pretty much every Dennys had a LaQuinta super close. The Alaska ones did too - very close - but there was only 3, so the joke is funnnier in Texas. NC and PA were not nearly as good. 
